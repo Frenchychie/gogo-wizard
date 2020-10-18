@@ -26,6 +26,7 @@ func _physics_process(delta):
 	
 	if facing_right == true:
 		$Sprite.scale.x = 1
+		
 	else:
 		$Sprite.scale.x = -1
 	
