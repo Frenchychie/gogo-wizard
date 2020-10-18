@@ -14,6 +14,8 @@ var on_ground = true
 var action = false
 var state_machine
 var attacking = false
+var combo_level = 0
+var can_combo = false
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -26,7 +28,6 @@ func _physics_process(delta):
 	
 	if facing_right == true:
 		$Sprite.scale.x = 1
-		
 	else:
 		$Sprite.scale.x = -1
 	
@@ -59,13 +60,23 @@ func _physics_process(delta):
 	else:
 		on_ground = true
 		jump_count = 0
-	if Input.is_action_just_pressed("attack"):
-			if on_ground == true && attacking == false:
+	if Input.is_action_pressed("attack"):
+			if on_ground == true && !attacking:
 				attacking = true
 				print("good job")
 				state_machine.travel("Attaccc")
+			elif can_combo == true:
+				print (can_combo)
+				state_machine.travel("Attacc 2")
 	motion = move_and_slide(motion, UP)
+		
+
+func start_combo_window():
+		can_combo = true
+	
 
 func attack_complete():
 	attacking = false
+
+
 
