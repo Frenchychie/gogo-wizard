@@ -65,18 +65,22 @@ func _physics_process(delta):
 				attacking = true
 				print("good job")
 				state_machine.travel("Attaccc")
-			elif can_combo == true:
-				print (can_combo)
-				state_machine.travel("Attacc 2")
+	if can_combo == true && Input.is_action_pressed("attack"):
+		print (can_combo)
+		state_machine.travel("Attacc 2")
+	
 	motion = move_and_slide(motion, UP)
 		
 
 func start_combo_window():
 		can_combo = true
-	
+
+func end_combo_window():
+		can_combo = false
 
 func attack_complete():
 	attacking = false
+	can_combo = false
 
 
 
